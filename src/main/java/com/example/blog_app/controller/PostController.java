@@ -1,5 +1,6 @@
 package com.example.blog_app.controller;
 
+import com.example.blog_app.config.AppConstants;
 import com.example.blog_app.dto.APIResponse;
 import com.example.blog_app.dto.PostDTO;
 import com.example.blog_app.dto.PostPaginatedResponse;
@@ -43,10 +44,10 @@ public class PostController {
 
     @GetMapping("/posts")
     public ResponseEntity<PostPaginatedResponse> getAllPost(
-            @RequestParam(value = "pageNumber", defaultValue = "0",required = false) Integer pageNumber,
-            @RequestParam(value = "pageSize", defaultValue = "5", required = false) Integer pageSize,
-            @RequestParam(value = "sortBy", defaultValue = "postId", required = false) String sortBy,
-            @RequestParam(value = "sortDirection", defaultValue = "asc", required = false) String sortDirection
+            @RequestParam(value = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER,required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
+            @RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDirection", defaultValue = AppConstants.SORT_DIR, required = false) String sortDirection
     ) {
         PostPaginatedResponse allPost = postService.getAllPost(pageNumber, pageSize, sortBy, sortDirection);
         return new ResponseEntity<>(allPost, HttpStatus.OK);
@@ -72,4 +73,5 @@ public class PostController {
 
         return new ResponseEntity<>(updatedPost, HttpStatus.OK);
     }
+
 }
